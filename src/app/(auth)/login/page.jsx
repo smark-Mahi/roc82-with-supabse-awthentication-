@@ -15,7 +15,12 @@ const Login = () => {
   const username = getLoggername();
   async function loginHandler(e) {
     e.preventDefault();
-    if (email && password) {
+    if (password && password.length < 8) {
+      toast("password must be 8 characters long", {
+        icon: "⚠️",
+      });
+    }
+    if (email && password && password.length >= 8) {
       setLoading(true);
       const response = await fetch("/api/existingUser", {
         method: "POST",

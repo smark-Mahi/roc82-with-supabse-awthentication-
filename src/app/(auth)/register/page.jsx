@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useGlobalContext } from "../../../Hooks/globalStates";
 import { useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const userName = getLoggername();
@@ -24,7 +25,7 @@ const Register = () => {
 
   async function createUserHandler(e) {
     e.preventDefault();
-    if (name && email && password) {
+    if (name && email && password && password.length >= 8) {
       setLoading(true);
       const response = await fetch("/api/user", {
         method: "POST",
